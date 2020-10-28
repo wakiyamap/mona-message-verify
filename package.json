@@ -1,13 +1,14 @@
 {
-  "name": "message-verify",
+  "name": "mona-message-verify",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bitcoinjs-message": "^2.1.3"
   }

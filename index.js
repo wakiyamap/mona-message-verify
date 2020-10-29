@@ -7,8 +7,8 @@ http.createServer(function (req, res) {
       data += chunk
     }).on('end', function () {
       if (data.length > 3000) {
-        res.writeHead(404, {"Content-Type": "text/plain"});
-        res.write("404 Not Found\n");
+        res.writeHead(413, {"Content-Type": "text/plain"});
+        res.write("413 Payload Too Large\n");
         res.end();
       }
       try {
@@ -21,14 +21,17 @@ http.createServer(function (req, res) {
         }
         res.end();
       } catch (err) {
-        res.writeHead(200, {'Content-Type' : 'text/html'});
+        res.writeHead(200, {'Content-Type' : 'application/json'});
         res.write("{\"result\": false}");
         res.end();
       }
     })
+  } else if (req.method === 'OPTIONS') {
+    res.writeHead(200, {'Allow' : 'OPTIONS, POST'});
+    res.end();
   } else {
-    res.writeHead(404, {"Content-Type": "text/plain"});
-    res.write("404 Not Found\n");
+    res.writeHead(405, {"Content-Type": "text/plain"});
+    res.write("405 Method Not Allowed\n");
     res.end();
   }
 }).listen(3000);

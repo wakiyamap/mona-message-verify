@@ -13,7 +13,7 @@ http.createServer(function (req, res) {
       }
       try {
         const obj = JSON.parse(data);
-        res.writeHead(200, {'Content-Type' : 'text/html'});
+        res.writeHead(200, {'Content-Type' : 'application/json'});
         if (bitcoinMessage.verify(obj.message, obj.address, obj.signature, "\x19Monacoin Signed Message:\n", true)) {
           res.write("{\"result\": true}");
         } else {

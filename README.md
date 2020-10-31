@@ -7,4 +7,4 @@ curl -X POST -H "Content-Type: application/json" -d '{"message":"card.mona.jp", 
 ```
 get {"result": true} or {"result": false}
 
-[test server https://verify-message.electrum-mona.org](https://verify-message.electrum-mona.org)
+test server [https://verify-message.electrum-mona.org](https://verify-message.electrum-mona.org)

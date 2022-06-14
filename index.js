@@ -10,20 +10,21 @@ http.createServer(function (req, res) {
         res.writeHead(413, {"Content-Type": "text/plain"});
         res.write("413 Payload Too Large\n");
         res.end();
-      }
-      try {
-        const obj = JSON.parse(data);
-        res.writeHead(200, {'Content-Type' : 'application/json'});
-        if (bitcoinMessage.verify(obj.message, obj.address, obj.signature, "\x19Monacoin Signed Message:\n", true)) {
-          res.write("{\"result\": true}");
-        } else {
+      } else {
+        try {
+          const obj = JSON.parse(data);
+          res.writeHead(200, {'Content-Type' : 'application/json'});
+          if (bitcoinMessage.verify(obj.message, obj.address, obj.signature, "\x19Monacoin Signed Message:\n", true)) {
+            res.write("{\"result\": true}");
+          } else {
+            res.write("{\"result\": false}");
+          }
+          res.end();
+        } catch (err) {
+          res.writeHead(200, {'Content-Type' : 'application/json'});
           res.write("{\"result\": false}");
+          res.end();
         }
-        res.end();
-      } catch (err) {
-        res.writeHead(200, {'Content-Type' : 'application/json'});
-        res.write("{\"result\": false}");
-        res.end();
       }
     })
   } else if (req.method === 'OPTIONS') {
